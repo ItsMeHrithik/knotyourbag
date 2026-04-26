@@ -37,22 +37,8 @@ function renderProducts(filter) {
     </div>
   `).join('');
   
-  const loadMoreContainer = document.getElementById('load-more-container');
-  if (filtered.length > 4 && window.innerWidth <= 900) {
-    grid.classList.remove('show-all');
-    loadMoreContainer.style.display = 'block';
-  } else {
-    loadMoreContainer.style.display = 'none';
-  }
-  
   setTimeout(observeReveals, 100);
 }
-
-document.getElementById('load-more-btn')?.addEventListener('click', () => {
-  document.getElementById('products-grid').classList.add('show-all');
-  document.getElementById('load-more-container').style.display = 'none';
-  setTimeout(observeReveals, 100);
-});
 
 function filterBags(cat, btn) {
   document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
