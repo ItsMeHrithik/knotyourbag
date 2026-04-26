@@ -85,10 +85,12 @@ window.addEventListener('scroll', () => {
 
 const mobileMenuBtn = document.getElementById('mobile-menu');
 const navLinks = document.getElementById('nav-links');
+const navBar = document.getElementById('navbar');
 
 mobileMenuBtn.addEventListener('click', () => {
   mobileMenuBtn.classList.toggle('open');
   navLinks.classList.toggle('open');
+  navBar.classList.toggle('menu-open');
 });
 
 // Close menu when a link is clicked
@@ -96,6 +98,7 @@ navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     mobileMenuBtn.classList.remove('open');
     navLinks.classList.remove('open');
+    navBar.classList.remove('menu-open');
   });
 });
 
