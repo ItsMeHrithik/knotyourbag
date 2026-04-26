@@ -24,14 +24,18 @@
   <!-- NAV -->
   <nav class="nav" id="navbar">
     <div class="logo">Kn<span class="logo-accent">∞</span>t Your Bag</div>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="#hero">Home</a></li>
       <li><a href="#products">Products</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact" class="nav-cta">Get Quote ✦</a></li>
     </ul>
-    <button class="mobile-menu" id="mobile-menu" aria-label="Menu">☰</button>
+    <button class="mobile-menu" id="mobile-menu" aria-label="Menu">
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -130,6 +134,9 @@
       <button class="filter-chip" onclick="filterBags('special',this)">Special</button>
     </div>
     <div class="products-grid" id="products-grid"></div>
+    <div class="load-more-container" id="load-more-container" style="display:none; text-align:center; margin-top:32px;">
+      <button class="btn btn-outline" id="load-more-btn">View All Products ↓</button>
+    </div>
     <div class="products-fomo">
       <div class="fomo-banner">
         <span class="fomo-pulse"></span>

@@ -36,8 +36,23 @@ function renderProducts(filter) {
       </div>
     </div>
   `).join('');
+  
+  const loadMoreContainer = document.getElementById('load-more-container');
+  if (filtered.length > 4 && window.innerWidth <= 900) {
+    grid.classList.remove('show-all');
+    loadMoreContainer.style.display = 'block';
+  } else {
+    loadMoreContainer.style.display = 'none';
+  }
+  
   setTimeout(observeReveals, 100);
 }
+
+document.getElementById('load-more-btn')?.addEventListener('click', () => {
+  document.getElementById('products-grid').classList.add('show-all');
+  document.getElementById('load-more-container').style.display = 'none';
+  setTimeout(observeReveals, 100);
+});
 
 function filterBags(cat, btn) {
   document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
@@ -77,9 +92,25 @@ function toggleFAQ(i) {
   ic.classList.toggle('open', !open);
 }
 
-// === STICKY NAV ===
+// === STICKY NAV & MOBILE MENU ===
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+const mobileMenuBtn = document.getElementById('mobile-menu');
+const navLinks = document.getElementById('nav-links');
+
+mobileMenuBtn.addEventListener('click', () => {
+  mobileMenuBtn.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+
+// Close menu when a link is clicked
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenuBtn.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
 });
 
 // === COUNTER ANIMATION ===
