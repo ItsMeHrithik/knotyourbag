@@ -153,7 +153,9 @@ if (tickerInner) tickerInner.innerHTML += tickerInner.innerHTML;
 // === VIEWER COUNT RANDOMIZER ===
 setInterval(() => {
   document.querySelectorAll('.product-viewers').forEach(el => {
-    const base = parseInt(el.textContent.match(/\d+/)?.[0] || 5);
+    const text = el.textContent;
+    const match = text.match(/\d+/);
+    const base = match ? parseInt(match[0]) : 5;
     const newVal = base + Math.floor(Math.random() * 5) - 2;
     el.innerHTML = `👁 ${Math.max(1, newVal)} viewing`;
   });
