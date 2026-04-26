@@ -1,0 +1,687 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --cream:#FAF7F2;--sage:#3D6B4F;--sage-light:#E8F0EB;--terra:#C4703A;--terra-light:#FAF0E8;
+    --ink:#1C1C1A;--muted:#6B6860;--border:#E2DDD6;--white:#FFFFFF;
+  }
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);font-size:15px;line-height:1.6}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  
+  /* NAV */
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+  .logo{font-family:'Playfair Display',serif;font-size:20px;letter-spacing:-0.3px;color:var(--sage)}
+  .logo span{color:var(--terra)}
+  .nav-links{display:flex;gap:28px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:400;transition:color 0.2s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-right{display:flex;gap:10px;align-items:center}
+  .btn{padding:9px 20px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;border:1px solid transparent}
+  .btn-primary{background:var(--sage);color:white;border-color:var(--sage)}
+  .btn-primary:hover{background:#2d5039}
+  .btn-outline{background:transparent;color:var(--sage);border-color:var(--sage)}
+  .btn-outline:hover{background:var(--sage-light)}
+  .btn-terra{background:var(--terra);color:white;border-color:var(--terra)}
+  .btn-terra:hover{background:#a8602f}
+  .btn-sm{padding:6px 14px;font-size:13px}
+  .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
+  .btn-ghost:hover{border-color:var(--muted)}
+  .tab-active{border-bottom:2px solid var(--terra) !important;color:var(--ink) !important}
+
+  /* VIEW TOGGLE */
+  .view-toggle{display:flex;background:#F0EDE8;border-radius:8px;padding:3px;gap:2px;margin-left:8px}
+  .view-btn{padding:6px 14px;border-radius:6px;font-size:13px;font-weight:400;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all 0.2s}
+  .view-btn.active{background:white;color:var(--ink);font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1fr 1fr;min-height:480px;overflow:hidden}
+  .hero-left{padding:64px 48px;background:var(--white);display:flex;flex-direction:column;justify-content:center}
+  .hero-eyebrow{font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--terra);margin-bottom:16px}
+  .hero-title{font-family:'Playfair Display',serif;font-size:46px;line-height:1.1;color:var(--ink);margin-bottom:20px}
+  .hero-title em{color:var(--sage);font-style:italic}
+  .hero-sub{color:var(--muted);font-size:16px;line-height:1.7;max-width:400px;margin-bottom:32px}
+  .hero-moq{display:inline-flex;align-items:center;gap:8px;background:var(--sage-light);padding:8px 16px;border-radius:20px;margin-bottom:32px}
+  .hero-moq span{font-size:13px;color:var(--sage);font-weight:500}
+  .hero-actions{display:flex;gap:12px}
+  .hero-right{background:linear-gradient(135deg, #E8F0EB 0%, #D4E6D9 50%, #C8DDD0 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .hero-bag-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:32px;width:100%}
+  .bag-card-hero{border-radius:12px;overflow:hidden;background:white;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;position:relative}
+  .bag-img{width:100%;height:100%;object-fit:cover}
+  .bag-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px}
+  .bag-icon{font-size:32px}
+  .bag-label{font-size:11px;color:var(--muted);text-align:center}
+
+  /* STATS BAR */
+  .stats-bar{background:var(--sage);display:flex;justify-content:space-around;padding:20px 48px}
+  .stat{text-align:center;color:white}
+  .stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:400}
+  .stat-label{font-size:12px;opacity:0.8;margin-top:2px;letter-spacing:0.5px}
+
+  /* SECTION */
+  .section{padding:72px 48px}
+  .section-label{font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--terra);margin-bottom:12px}
+  .section-title{font-family:'Playfair Display',serif;font-size:36px;line-height:1.15;color:var(--ink);margin-bottom:16px}
+  .section-sub{color:var(--muted);font-size:15px;max-width:520px;line-height:1.7;margin-bottom:40px}
+
+  /* PRODUCTS */
+  .products-section{background:var(--white)}
+  .products-filter{display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap}
+  .filter-chip{padding:7px 18px;border-radius:20px;border:1px solid var(--border);font-size:13px;cursor:pointer;background:transparent;color:var(--muted);transition:all 0.2s}
+  .filter-chip.active{background:var(--ink);color:white;border-color:var(--ink)}
+  .filter-chip:hover:not(.active){border-color:var(--muted)}
+  .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+  .product-card{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--white);transition:transform 0.2s,box-shadow 0.2s;cursor:pointer}
+  .product-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.1)}
+  .product-img-wrap{aspect-ratio:4/5;background:#F5F2EE;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+  .product-tag{position:absolute;top:10px;left:10px;background:var(--sage);color:white;font-size:10px;padding:3px 8px;border-radius:4px;font-weight:500}
+  .product-info{padding:14px 16px}
+  .product-name{font-weight:500;font-size:14px;color:var(--ink);margin-bottom:4px}
+  .product-size{font-size:12px;color:var(--muted)}
+  .product-actions{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+
+  /* BAG ILLUSTRATION */
+  .bag-svg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:24px}
+
+  /* ABOUT */
+  .about-section{background:var(--cream)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .value-item{display:flex;gap:16px;margin-bottom:28px}
+  .value-icon{width:40px;height:40px;border-radius:10px;background:var(--sage-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+  .value-title{font-weight:500;font-size:15px;color:var(--ink);margin-bottom:4px}
+  .value-desc{font-size:13px;color:var(--muted);line-height:1.6}
+  .about-quote{background:var(--white);border-radius:16px;padding:32px;border-left:4px solid var(--terra)}
+  .quote-text{font-family:'Playfair Display',serif;font-size:22px;line-height:1.5;color:var(--ink);margin-bottom:16px;font-style:italic}
+  .quote-meta{font-size:13px;color:var(--muted)}
+
+  /* FAQ */
+  .faq-section{background:var(--white)}
+  .faq-item{border-bottom:1px solid var(--border);padding:20px 0}
+  .faq-q{font-weight:500;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .faq-q:hover{color:var(--sage)}
+  .faq-a{font-size:14px;color:var(--muted);line-height:1.7;margin-top:12px;max-width:640px}
+  .faq-icon{font-size:18px;color:var(--muted);flex-shrink:0}
+
+  /* CTA */
+  .cta-section{background:var(--sage);padding:64px 48px;text-align:center}
+  .cta-title{font-family:'Playfair Display',serif;font-size:40px;color:white;margin-bottom:16px}
+  .cta-sub{color:rgba(255,255,255,0.8);font-size:16px;margin-bottom:32px}
+  .btn-white{background:white;color:var(--sage);border:none;padding:14px 32px;font-size:15px;border-radius:8px;cursor:pointer;font-weight:500;transition:all 0.2s}
+  .btn-white:hover{background:var(--cream)}
+  .contact-chips{display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+  .contact-chip{padding:8px 16px;border-radius:20px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);font-size:13px}
+
+  /* ADMIN PANEL */
+  .admin-wrap{background:var(--cream);min-height:600px;padding:0}
+  .admin-header{background:var(--white);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;justify-content:space-between;align-items:center}
+  .admin-title{font-size:16px;font-weight:500;color:var(--ink)}
+  .admin-sub{font-size:13px;color:var(--muted);margin-top:2px}
+  .admin-body{display:grid;grid-template-columns:280px 1fr;min-height:560px}
+  .admin-sidebar{background:var(--white);border-right:1px solid var(--border);padding:20px}
+  .sidebar-section{margin-bottom:24px}
+  .sidebar-label{font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .sidebar-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:7px;cursor:pointer;font-size:14px;color:var(--muted);transition:all 0.15s}
+  .sidebar-item:hover{background:var(--cream);color:var(--ink)}
+  .sidebar-item.active-s{background:var(--sage-light);color:var(--sage);font-weight:500}
+  .sidebar-dot{width:8px;height:8px;border-radius:50%}
+  .admin-main{padding:28px 32px}
+  
+  /* UPLOAD ZONE */
+  .upload-zone{border:2px dashed var(--border);border-radius:12px;padding:48px;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--white);margin-bottom:28px}
+  .upload-zone:hover{border-color:var(--sage);background:var(--sage-light)}
+  .upload-icon{font-size:36px;margin-bottom:12px}
+  .upload-text{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:6px}
+  .upload-hint{font-size:13px;color:var(--muted)}
+  .upload-badge{display:inline-block;background:var(--sage-light);color:var(--sage);font-size:12px;padding:4px 12px;border-radius:12px;margin-top:10px;font-weight:500}
+  
+  /* ADMIN GRID */
+  .admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
+  .admin-card{border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--white);position:relative}
+  .admin-card:hover .admin-overlay{opacity:1}
+  .admin-img{aspect-ratio:1;background:#F5F2EE;display:flex;align-items:center;justify-content:center;font-size:28px}
+  .admin-overlay{position:absolute;inset:0;background:rgba(28,28,26,0.6);display:flex;align-items:center;justify-content:center;gap:8px;opacity:0;transition:opacity 0.2s}
+  .admin-card-info{padding:10px 12px;border-top:1px solid var(--border)}
+  .admin-card-name{font-size:13px;font-weight:500;color:var(--ink)}
+  .admin-card-size{font-size:11px;color:var(--muted);margin-top:2px}
+  .delete-btn{background:#FEE2E2;color:#DC2626;border:none;padding:7px 14px;border-radius:6px;font-size:12px;cursor:pointer;font-weight:500}
+  .delete-btn:hover{background:#FCA5A5}
+  .edit-btn{background:white;color:var(--ink);border:1px solid var(--border);padding:7px 14px;border-radius:6px;font-size:12px;cursor:pointer}
+  .edit-btn:hover{background:var(--cream)}
+
+  /* API STACK */
+  .stack-section{padding:40px 48px;background:var(--cream)}
+  .stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+  .stack-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px}
+  .stack-icon-wrap{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px}
+  .stack-name{font-weight:500;font-size:14px;color:var(--ink);margin-bottom:4px}
+  .stack-desc{font-size:12px;color:var(--muted);line-height:1.5}
+  .stack-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;display:inline-block;margin-top:6px}
+  .badge-free{background:#E8F0EB;color:var(--sage)}
+  .badge-key{background:var(--terra-light);color:var(--terra)}
+  .badge-fast{background:#EEF2FF;color:#4F46E5}
+
+  /* FOOTER */
+  .footer{background:var(--ink);padding:48px;color:rgba(255,255,255,0.7);font-size:14px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px}
+  .footer-brand{font-family:'Playfair Display',serif;font-size:22px;color:white;margin-bottom:8px}
+  .footer-tag{color:rgba(255,255,255,0.5);font-size:13px}
+  .footer-col-title{font-weight:500;color:rgba(255,255,255,0.9);margin-bottom:14px;font-size:14px}
+  .footer-link{display:block;color:rgba(255,255,255,0.55);text-decoration:none;font-size:13px;margin-bottom:8px}
+  .footer-link:hover{color:white}
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar{width:4px}
+  ::-webkit-scrollbar-track{background:var(--cream)}
+  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+</style>
+
+<h2 class="sr-only">Knot Your Bag — website prototype with public view and admin panel</h2>
+
+<div id="app">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="logo">Kn<span>∞</span>t Your Bag</div>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showSection('home');return false">Home</a></li>
+      <li><a href="#" onclick="showSection('products');return false">Products</a></li>
+      <li><a href="#" onclick="showSection('about');return false">About</a></li>
+      <li><a href="#" onclick="showSection('faq');return false">FAQ</a></li>
+      <li><a href="#" onclick="showSection('contact');return false">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="view-toggle">
+        <button class="view-btn active" id="btn-public" onclick="switchView('public')">Website</button>
+        <button class="view-btn" id="btn-admin" onclick="switchView('admin')">Admin</button>
+        <button class="view-btn" id="btn-stack" onclick="switchView('stack')">Tech Stack</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PUBLIC VIEW -->
+  <div id="view-public">
+
+    <!-- HERO -->
+    <div id="sec-home" class="hero">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Custom Cotton Bags</div>
+        <h1 class="hero-title">Your bag,<br><em>your way.</em></h1>
+        <div class="hero-moq">
+          <span>✦ MOQ from just 30 pieces — no minimum mindset</span>
+        </div>
+        <p class="hero-sub">Fully customizable cotton bags crafted with precision. Whether 30 pieces or 3,000 — every order gets the same craftsmanship.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="showSection('products')">Browse Bags</button>
+          <button class="btn btn-outline" onclick="showSection('contact')">Get a Quote</button>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-bag-grid">
+          <div class="bag-card-hero" style="transform:rotate(-2deg)">
+            <div class="bag-placeholder" style="background:#E8F0EB">
+              <svg width="60" height="72" viewBox="0 0 60 72"><rect x="8" y="20" width="44" height="48" rx="4" fill="#3D6B4F" opacity="0.3"/><path d="M20 20 Q20 8 30 8 Q40 8 40 20" fill="none" stroke="#3D6B4F" stroke-width="3" stroke-linecap="round"/><rect x="14" y="32" width="32" height="4" rx="2" fill="#3D6B4F" opacity="0.5"/><rect x="14" y="42" width="20" height="4" rx="2" fill="#3D6B4F" opacity="0.3"/></svg>
+              <div class="bag-label">Tote Bag<br>37×42×11 cm</div>
+            </div>
+          </div>
+          <div class="bag-card-hero" style="transform:rotate(1.5deg);margin-top:16px">
+            <div class="bag-placeholder" style="background:#F5EDE6">
+              <svg width="60" height="72" viewBox="0 0 60 72"><rect x="8" y="20" width="44" height="48" rx="4" fill="#C4703A" opacity="0.3"/><path d="M20 20 Q20 8 30 8 Q40 8 40 20" fill="none" stroke="#C4703A" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="44" r="10" fill="none" stroke="#C4703A" stroke-width="2" opacity="0.6"/><text x="30" y="49" text-anchor="middle" font-size="11" fill="#C4703A" opacity="0.8">🌿</text></svg>
+              <div class="bag-label">Shopping Bag<br>37×42 cm</div>
+            </div>
+          </div>
+          <div class="bag-card-hero" style="transform:rotate(1deg)">
+            <div class="bag-placeholder" style="background:#EEF4F8">
+              <svg width="48" height="72" viewBox="0 0 48 72"><rect x="4" y="20" width="40" height="48" rx="4" fill="#3B82F6" opacity="0.2"/><line x1="24" y1="4" x2="12" y2="20" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" opacity="0.6"/><line x1="24" y1="4" x2="36" y2="20" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" opacity="0.6"/><circle cx="12" cy="20" r="3" fill="#3B82F6" opacity="0.5"/><circle cx="36" cy="20" r="3" fill="#3B82F6" opacity="0.5"/></svg>
+              <div class="bag-label">Drawstring<br>30×40 cm</div>
+            </div>
+          </div>
+          <div class="bag-card-hero" style="transform:rotate(-1.5deg);margin-top:8px">
+            <div class="bag-placeholder" style="background:#FDF8E8">
+              <svg width="72" height="52" viewBox="0 0 72 52"><rect x="4" y="8" width="64" height="40" rx="6" fill="#EAB308" opacity="0.25"/><path d="M16 8 L16 2 M56 8 L56 2" stroke="#EAB308" stroke-width="3" stroke-linecap="round" opacity="0.6"/><rect x="28" y="8" width="16" height="6" rx="3" fill="#EAB308" opacity="0.4"/></svg>
+              <div class="bag-label">Zipper Bag<br>28×18×8 cm</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-num">30+</div><div class="stat-label">Min. Order Qty</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Natural Cotton</div></div>
+      <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Bag Styles</div></div>
+      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Customizations</div></div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div id="sec-products" class="section products-section">
+      <div class="section-label">Our Collection</div>
+      <h2 class="section-title">Every bag, made your way</h2>
+      <div class="products-filter">
+        <button class="filter-chip active" onclick="filterBags('all',this)">All Bags</button>
+        <button class="filter-chip" onclick="filterBags('tote',this)">Tote Bags</button>
+        <button class="filter-chip" onclick="filterBags('drawstring',this)">Drawstring</button>
+        <button class="filter-chip" onclick="filterBags('zipper',this)">Zipper</button>
+        <button class="filter-chip" onclick="filterBags('special',this)">Special</button>
+      </div>
+      <div class="products-grid" id="products-grid"></div>
+    </div>
+
+    <!-- ABOUT -->
+    <div id="sec-about" class="section about-section">
+      <div class="about-grid">
+        <div>
+          <div class="section-label">Our Story</div>
+          <h2 class="section-title">Craftsmanship meets flexibility</h2>
+          <p style="color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:28px">Founded by two friends with a shared passion for sustainable living and smart design. We saw the gap — most manufacturers force high MOQs, leaving small businesses and individuals without good options. That ends here.</p>
+          <div class="value-item">
+            <div class="value-icon">🌱</div>
+            <div><div class="value-title">100% Natural Cotton</div><div class="value-desc">Ethically sourced, eco-friendly materials in every order.</div></div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">✦</div>
+            <div><div class="value-title">Low MOQ, High Quality</div><div class="value-desc">Starting from 30 pieces — same quality, same attention, every time.</div></div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🎨</div>
+            <div><div class="value-title">Fully Customizable</div><div class="value-desc">Size, fabric, prints, handles, branding — designed to your exact spec.</div></div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🌍</div>
+            <div><div class="value-title">Global Shipping</div><div class="value-desc">Smooth international delivery with reliable logistics.</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="about-quote">
+            <div class="quote-text">"No order is too small. Every bag deserves big attention — no matter the quantity."</div>
+            <div class="quote-meta">— Knot Your Bag team</div>
+          </div>
+          <div style="margin-top:24px;background:var(--white);border-radius:16px;padding:24px;border:1px solid var(--border)">
+            <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:16px">Production Timelines</div>
+            <div style="margin-bottom:12px">
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="color:var(--muted)">30–100 pieces</span><span style="font-weight:500">1–2 weeks</span></div>
+              <div style="height:6px;background:#F0EDE8;border-radius:3px"><div style="width:40%;height:100%;background:var(--sage);border-radius:3px"></div></div>
+            </div>
+            <div style="margin-bottom:12px">
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="color:var(--muted)">100–500 pieces</span><span style="font-weight:500">2–3 weeks</span></div>
+              <div style="height:6px;background:#F0EDE8;border-radius:3px"><div style="width:65%;height:100%;background:var(--sage);border-radius:3px"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span style="color:var(--muted)">500+ pieces</span><span style="font-weight:500">3–4 weeks</span></div>
+              <div style="height:6px;background:#F0EDE8;border-radius:3px"><div style="width:85%;height:100%;background:var(--terra);border-radius:3px"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div id="sec-faq" class="section faq-section">
+      <div style="max-width:720px;margin:0 auto">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">Common questions</h2>
+        <div id="faq-list"></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div id="sec-contact" class="cta-section">
+      <h2 class="cta-title">Got an idea in mind?</h2>
+      <p class="cta-sub">Let's make it real — Kn∞t Your Bag</p>
+      <button class="btn-white">Start Your Order</button>
+      <div class="contact-chips">
+        <div class="contact-chip">📧 hello@knotyourbag.com</div>
+        <div class="contact-chip">📞 +91 9975572700</div>
+        <div class="contact-chip">📷 @knotyourbag</div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div>
+        <div class="footer-brand">Kn∞t Your Bag</div>
+        <div class="footer-tag">Custom Cotton Bags · Eco-Friendly · Low MOQ</div>
+        <div style="margin-top:16px;font-size:13px">"Your ideas, our craftsmanship — perfectly tied together."</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Products</div>
+        <a class="footer-link" href="#">Tote Bags</a>
+        <a class="footer-link" href="#">Drawstring Bags</a>
+        <a class="footer-link" href="#">Zipper Bags</a>
+        <a class="footer-link" href="#">Lunch Totes</a>
+        <a class="footer-link" href="#">Kids Bags</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <a class="footer-link" href="#">About Us</a>
+        <a class="footer-link" href="#">FAQ</a>
+        <a class="footer-link" href="#">Contact</a>
+        <a class="footer-link" href="#">Privacy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN VIEW -->
+  <div id="view-admin" style="display:none">
+    <div class="admin-wrap">
+      <div class="admin-header">
+        <div>
+          <div class="admin-title">Bag Catalog Manager</div>
+          <div class="admin-sub">Kn∞t Your Bag — Admin Panel</div>
+        </div>
+        <div style="display:flex;gap:10px">
+          <span style="font-size:13px;color:var(--muted);align-self:center">12 bags published</span>
+          <button class="btn btn-primary btn-sm" onclick="showUpload()">+ Upload Bags</button>
+        </div>
+      </div>
+      <div class="admin-body">
+        <div class="admin-sidebar">
+          <div class="sidebar-section">
+            <div class="sidebar-label">Library</div>
+            <div class="sidebar-item active-s" onclick="setAdminTab(this)">
+              <div class="sidebar-dot" style="background:var(--sage)"></div> All Bags (12)
+            </div>
+            <div class="sidebar-item" onclick="setAdminTab(this)">
+              <div class="sidebar-dot" style="background:#3B82F6"></div> Tote Bags (4)
+            </div>
+            <div class="sidebar-item" onclick="setAdminTab(this)">
+              <div class="sidebar-dot" style="background:#C4703A"></div> Drawstring (3)
+            </div>
+            <div class="sidebar-item" onclick="setAdminTab(this)">
+              <div class="sidebar-dot" style="background:#EAB308"></div> Zipper Bags (2)
+            </div>
+            <div class="sidebar-item" onclick="setAdminTab(this)">
+              <div class="sidebar-dot" style="background:#9C6FDE"></div> Special (3)
+            </div>
+          </div>
+          <div class="sidebar-section">
+            <div class="sidebar-label">Node.js API</div>
+            <div style="background:#F5F2EE;border-radius:8px;padding:12px;font-size:11px;font-family:monospace;color:var(--muted);line-height:1.9">
+              <div style="color:var(--sage);font-weight:500">GET</div> /api/bags<br>
+              <div style="color:#3B82F6;font-weight:500">POST</div> /api/bags<br>
+              <div style="color:var(--terra);font-weight:500">DELETE</div> /api/bags/:id<br>
+              <div style="color:#EAB308;font-weight:500">PUT</div> /api/bags/:id
+            </div>
+          </div>
+          <div class="sidebar-section">
+            <div class="sidebar-label">Storage</div>
+            <div style="font-size:12px;color:var(--muted)">Cloudinary CDN</div>
+            <div style="margin-top:8px;background:#F0EDE8;border-radius:6px;height:6px"><div style="width:34%;height:100%;background:var(--sage);border-radius:6px"></div></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px">8.4 GB / 25 GB free</div>
+          </div>
+        </div>
+        <div class="admin-main">
+          <div class="upload-zone" id="upload-zone" onclick="this.style.borderColor='var(--sage)'">
+            <div class="upload-icon">📁</div>
+            <div class="upload-text">Drop bag images here</div>
+            <div class="upload-hint">PNG, JPG, WEBP · Max 10 MB each · Multiple files OK</div>
+            <div class="upload-badge">✓ Auto-converts to WebP · CDN delivery · Blur-up preview</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+            <div style="font-size:14px;font-weight:500">Published Bags</div>
+            <div style="display:flex;gap:8px">
+              <select style="font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:white;color:var(--muted)">
+                <option>Sort: Newest</option><option>Sort: Name</option>
+              </select>
+            </div>
+          </div>
+          <div class="admin-grid" id="admin-grid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECH STACK VIEW -->
+  <div id="view-stack" style="display:none">
+    <div style="padding:40px 48px 0;background:white;border-bottom:1px solid var(--border)">
+      <div class="section-label">2026 Standard</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:30px;margin-bottom:8px">Full Tech Architecture</h2>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:28px">Recommended stack for fast image loading + clean admin CMS</p>
+      <div style="display:flex;gap:0;border-bottom:1px solid var(--border)">
+        <button class="btn btn-ghost btn-sm tab-active" style="border-radius:0;border-bottom:none;border-top:none;border-left:none;border-right:none;padding:10px 20px">Stack Overview</button>
+      </div>
+    </div>
+    <div class="stack-section">
+      <div style="font-size:13px;font-weight:500;color:var(--muted);margin-bottom:16px;letter-spacing:1px;text-transform:uppercase">Frontend</div>
+      <div class="stack-grid" style="margin-bottom:32px">
+        <div class="stack-card">
+          <div class="stack-icon-wrap" style="background:#EEF2FF;font-size:20px">⚛️</div>
+          <div class="stack-name">React + Vite</div>
+          <div class="stack-desc">Lightning fast dev + build. HMR under 100ms. Bundle splitting for fast first load.</div>
+          <div class="stack-badge badge-free">Free</div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-icon-wrap" style="background:#F0FDF4;font-size:20px">🎨</div>
+          <div class="stack-name">TailwindCSS</div>
+          <div class="stack-desc">Utility-first CSS. Purged in production — final CSS under 8KB.</div>
+          <div class="stack-badge badge-free">Free</div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-icon-wrap" style="background:#FFF7ED;font-size:20px">🔄</div>
+          <div class="stack-name">React Query</div>
+          <div class="stack-desc">Caches bag gallery for 5 min. Stale-while-revalidate pattern. Zero re-fetching.</div>
+          <div class="stack-badge badge-fast">Performance</div>
+        </div>
+      </div>
+      <div style="font-size:13px;font-weight:500;color:var(--muted);margin-bottom:16px;letter-spacing:1px;text-transform:uppercase">Backend (Node.js)</div>
+      <div class="stack-grid" style="margin-bottom:32px">
+        <div class="stack-card">
+          <div class="stack-icon-wrap" style="background:#F0FDF4;font-size:20px">🟢</div>
+          <div class="stack-name">Express.js</div>
+          <div class="stack-desc">REST API: GET /bags, POST /bags (upload), DELETE /bags/:id, PUT /bags/:id.</div>
+          <div class="stack-badge badge-free">Free</div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-icon-wrap" style="background:#EFF6FF;font-size:20px">📦</div>
+          <div class="stack-name">Multer</div>
+          <div class="stack-desc">Streams uploaded files directly to Cloudinary. Never touches local disk.</div>
+          <div class="stack-badge badge-free">Free</div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-icon-wrap" style="background:#FEF9EE;font-size:20px">🔐</div>
+          <div class="stack-name">JWT Auth</div>
+          <div class="stack-desc">Admin-only routes protected. Public gallery is unauthenticated (fast CDN).</div>
+          <div class="stack-badge badge-free">Free</div>
+        </div>
+      </div>
+      <div style="font-size:13px;font-weight:500;color:var(--muted);margin-bottom:16px;letter-spacing:1px;text-transform:uppercase">Image Storage — key to fast loading</div>
+      <div class="stack-grid" style="margin-bottom:32px">
+        <div class="stack-card" style="border:2px solid var(--sage);grid-column:span 2">
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div class="stack-icon-wrap" style="background:var(--sage-light);font-size:20px">☁️</div>
+            <div>
+              <div class="stack-name">Cloudinary — Recommended ✓</div>
+              <div class="stack-desc">Auto-converts to WebP/AVIF (60% smaller). 200+ CDN edge nodes. On-the-fly transforms: <code style="background:#F5F2EE;padding:1px 5px;border-radius:3px;font-size:11px">w_400,f_auto,q_auto</code>. Blur-up LQIP placeholders. Delete by public_id. 25GB free tier.</div>
+              <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+                <span class="stack-badge badge-free">25 GB free</span>
+                <span class="stack-badge badge-fast">CDN global</span>
+                <span class="stack-badge badge-key">Auto WebP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-icon-wrap" style="background:#FFF7ED;font-size:20px">☁️</div>
+          <div class="stack-name">AWS S3 + CloudFront</div>
+          <div class="stack-desc">Production-scale alternative. Higher control, ~$5/mo for small traffic.</div>
+          <div class="stack-badge" style="background:#FEF3C7;color:#92400E">Paid</div>
+        </div>
+      </div>
+      <div style="font-size:13px;font-weight:500;color:var(--muted);margin-bottom:16px;letter-spacing:1px;text-transform:uppercase">Database</div>
+      <div class="stack-grid" style="margin-bottom:32px">
+        <div class="stack-card" style="border:2px solid var(--terra)">
+          <div class="stack-icon-wrap" style="background:var(--terra-light);font-size:20px">🐘</div>
+          <div class="stack-name">PostgreSQL via Supabase ✓</div>
+          <div class="stack-desc">Stores: id, name, category, cloudinary_url, cloudinary_public_id, size_info, created_at. Free tier. Built-in auth.</div>
+          <div class="stack-badge badge-free">Free tier</div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-icon-wrap" style="background:#F0FDF4;font-size:20px">🍃</div>
+          <div class="stack-name">MongoDB Atlas</div>
+          <div class="stack-desc">Alternative — flexible schema for product catalogs. Free 512MB tier.</div>
+          <div class="stack-badge badge-free">Free tier</div>
+        </div>
+      </div>
+      <div style="font-size:13px;font-weight:500;color:var(--muted);margin-bottom:16px;letter-spacing:1px;text-transform:uppercase">Deployment</div>
+      <div class="stack-grid">
+        <div class="stack-card">
+          <div class="stack-icon-wrap" style="background:#000;font-size:16px">▲</div>
+          <div class="stack-name">Vercel</div>
+          <div class="stack-desc">Frontend deploy. Auto CI/CD from GitHub. Edge network. Free tier.</div>
+          <div class="stack-badge badge-free">Free</div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-icon-wrap" style="background:#7C3AED;font-size:18px">🚂</div>
+          <div class="stack-name">Railway</div>
+          <div class="stack-desc">Node.js backend hosting. ~$5/mo. One-click deploy from GitHub.</div>
+          <div class="stack-badge" style="background:#EDE9FE;color:#5B21B6">~$5/mo</div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-icon-wrap" style="background:var(--sage-light);font-size:18px">🛡️</div>
+          <div class="stack-name">Supabase</div>
+          <div class="stack-desc">Database + Auth. Free up to 500MB. Can also handle image storage as alternative.</div>
+          <div class="stack-badge badge-free">Free tier</div>
+        </div>
+      </div>
+      <div style="margin-top:28px;background:var(--white);border-radius:12px;padding:24px;border:1px solid var(--border)">
+        <div style="font-size:14px;font-weight:500;margin-bottom:12px">Fast Loading Checklist ✓</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center"><span style="color:var(--sage)">✓</span> Cloudinary auto-format (WebP/AVIF)</div>
+          <div style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center"><span style="color:var(--sage)">✓</span> loading="lazy" on all images</div>
+          <div style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center"><span style="color:var(--sage)">✓</span> LQIP blur-up placeholders</div>
+          <div style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center"><span style="color:var(--sage)">✓</span> React Query 5-min cache</div>
+          <div style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center"><span style="color:var(--sage)">✓</span> Responsive srcset via Cloudinary transforms</div>
+          <div style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center"><span style="color:var(--sage)">✓</span> Vite code-splitting</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const bags=[
+  {id:1,name:'Canvas Tote Bag',cat:'tote',size:'37×42×11 cm',color:'#E8F0EB',emoji:'👜',tag:'Bestseller'},
+  {id:2,name:'Medium Canvas Tote',cat:'tote',size:'37×42 + 10 cm gusset',color:'#EEF4F8',emoji:'🛍️',tag:null},
+  {id:3,name:'Ikat Stripe Tote',cat:'tote',size:'37×42 cm',color:'#F5EDE6',emoji:'🎨',tag:'New'},
+  {id:4,name:'Shopping Bag',cat:'tote',size:'37×42 cm',color:'#FDF8E8',emoji:'🛒',tag:null},
+  {id:5,name:'Drawstring Bag S',cat:'drawstring',size:'15×20 cm',color:'#EEF4F8',emoji:'🎒',tag:null},
+  {id:6,name:'Drawstring Bag M',cat:'drawstring',size:'25×30 cm',color:'#F0F4EE',emoji:'🎒',tag:null},
+  {id:7,name:'Drawstring Bag L',cat:'drawstring',size:'30×40 cm',color:'#F5EDE6',emoji:'🎒',tag:'Custom'},
+  {id:8,name:'Zipper Foldable Bag',cat:'zipper',size:'28×18×8 cm',color:'#FDF8E8',emoji:'💼',tag:null},
+  {id:9,name:'Zip Pouch',cat:'zipper',size:'20×12 cm',color:'#F5F0F8',emoji:'👛',tag:null},
+  {id:10,name:'Lunch Tote',cat:'special',size:'21×21×12 cm',color:'#FFF5EE',emoji:'🍱',tag:null},
+  {id:11,name:'Kids Character Bag',cat:'special',size:'Custom',color:'#FFF0F5',emoji:'🌈',tag:'Kids'},
+  {id:12,name:'Shoe Bag',cat:'special',size:'35×45 cm',color:'#F0F8FF',emoji:'👟',tag:null},
+];
+
+let currentFilter='all';
+
+function renderProducts(filter){
+  const grid=document.getElementById('products-grid');
+  const filtered=filter==='all'?bags:bags.filter(b=>b.cat===filter);
+  grid.innerHTML=filtered.map(b=>`
+    <div class="product-card">
+      <div class="product-img-wrap" style="background:${b.color}">
+        ${b.tag?`<div class="product-tag">${b.tag}</div>`:''}
+        <div style="font-size:52px">${b.emoji}</div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">${b.name}</div>
+        <div class="product-size">${b.size}</div>
+        <div class="product-actions">
+          <span style="font-size:11px;color:var(--sage);font-weight:500">100% Cotton</span>
+          <button class="btn btn-outline btn-sm">Inquire</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAdminGrid(){
+  const grid=document.getElementById('admin-grid');
+  grid.innerHTML=bags.map(b=>`
+    <div class="admin-card">
+      <div class="admin-img" style="background:${b.color}"><span style="font-size:36px">${b.emoji}</span></div>
+      <div class="admin-overlay">
+        <button class="edit-btn">Edit</button>
+        <button class="delete-btn" onclick="deleteBag(${b.id},this)">Delete</button>
+      </div>
+      <div class="admin-card-info">
+        <div class="admin-card-name">${b.name}</div>
+        <div class="admin-card-size">${b.size}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function deleteBag(id,btn){
+  const card=btn.closest('.admin-card');
+  card.style.opacity='0.4';
+  setTimeout(()=>{
+    const idx=bags.findIndex(b=>b.id===id);
+    if(idx>-1) bags.splice(idx,1);
+    renderAdminGrid();
+  },300);
+}
+
+const faqs=[
+  {q:'What is your minimum order quantity (MOQ)?',a:'Just 30 pieces! Unlike most manufacturers, we happily cater to small-volume orders without cutting corners on quality.'},
+  {q:'Can I customize my design?',a:'Absolutely. You can choose the size, fabric type, handle style, color, and print design — even add your logo or artwork.'},
+  {q:'Do you ship internationally?',a:'Yes, we deliver across borders. Our production and logistics enable smooth global shipping.'},
+  {q:'What fabrics do you use?',a:'We primarily work with 100% cotton canvas and organic cotton, and on request we can offer recycled or blended materials too.'},
+  {q:'How long will my order take?',a:'For smaller orders (30–100 pieces), typical production time is 1–2 weeks. Larger or highly customized orders may take slightly longer.'},
+  {q:'Do you offer design help?',a:'Yes! We can assist with print design, layout, and logo placement to ensure your bag looks exactly how you envision it.'},
+];
+
+function renderFAQ(){
+  const list=document.getElementById('faq-list');
+  list.innerHTML=faqs.map((f,i)=>`
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFAQ(${i})">
+        <span>${f.q}</span>
+        <span class="faq-icon" id="fiq-${i}">+</span>
+      </div>
+      <div class="faq-a" id="fa-${i}" style="display:none">${f.a}</div>
+    </div>
+  `).join('');
+}
+
+function toggleFAQ(i){
+  const a=document.getElementById('fa-'+i);
+  const ic=document.getElementById('fiq-'+i);
+  const open=a.style.display==='block';
+  a.style.display=open?'none':'block';
+  ic.textContent=open?'+':'−';
+}
+
+function filterBags(cat,btn){
+  currentFilter=cat;
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts(cat);
+}
+
+function showSection(s){
+  switchView('public');
+  setTimeout(()=>{
+    const el=document.getElementById('sec-'+s);
+    if(el) el.scrollIntoView({behavior:'smooth'});
+  },100);
+}
+
+function switchView(v){
+  ['public','admin','stack'].forEach(x=>{
+    document.getElementById('view-'+x).style.display=x===v?'block':'none';
+    document.getElementById('btn-'+x).classList.toggle('active',x===v);
+  });
+}
+
+function setAdminTab(el){
+  document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active-s'));
+  el.classList.add('active-s');
+}
+
+renderProducts('all');
+renderFAQ();
+renderAdminGrid();
+</script>

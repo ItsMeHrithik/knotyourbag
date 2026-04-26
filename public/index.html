@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knot Your Bag — Premium Custom Cotton Bags | Limited Edition</title>
+  <meta name="description" content="Handcrafted custom cotton bags. MOQ from just 30 pieces. Premium quality, eco-friendly, fully customizable. Order before stock runs out!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- FOMO TICKER -->
+  <div class="fomo-ticker" id="fomo-ticker">
+    <div class="ticker-inner">
+      <span>🔥 <strong>47 people</strong> viewing right now</span>
+      <span>⚡ <strong>12 orders</strong> placed today</span>
+      <span>🚨 Limited batch — only <strong>8 slots</strong> left this month</span>
+      <span>✨ Free design help on orders this week</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="navbar">
+    <div class="logo">Kn<span class="logo-accent">∞</span>t Your Bag</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact" class="nav-cta">Get Quote ✦</a></li>
+    </ul>
+    <button class="mobile-menu" id="mobile-menu" aria-label="Menu">☰</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-badge animate-in">
+          <span class="badge-dot"></span> Trending Now — 230+ orders this month
+        </div>
+        <h1 class="hero-title animate-in">Your Bag,<br><em>Your Way.</em></h1>
+        <p class="hero-sub animate-in">Premium handcrafted cotton bags — fully customizable from just <strong>30 pieces</strong>. Same craftsmanship whether 30 or 3,000.</p>
+        <div class="hero-urgency animate-in">
+          <div class="urgency-icon">⏰</div>
+          <div>
+            <div class="urgency-title">Limited Production Slots</div>
+            <div class="urgency-text">Only <strong class="pulse-text">8 slots</strong> remaining for May batch</div>
+          </div>
+        </div>
+        <div class="hero-actions animate-in">
+          <a href="#products" class="btn btn-primary btn-glow">Browse Collection <span class="btn-arrow">→</span></a>
+          <a href="#contact" class="btn btn-outline">Get Free Quote</a>
+        </div>
+        <div class="hero-social-proof animate-in">
+          <div class="avatar-stack">
+            <div class="avatar" style="background:#E8C4A0">H</div>
+            <div class="avatar" style="background:#A0C4E8">P</div>
+            <div class="avatar" style="background:#C4E8A0">R</div>
+            <div class="avatar" style="background:#E8A0C4">S</div>
+          </div>
+          <span>Joined by <strong>500+</strong> happy customers</span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-gallery">
+          <div class="hero-img-card hero-img-main" data-tilt>
+            <img src="/images/ikat-tote.jpg" alt="Ikat Stripe Tote Bag" loading="eager">
+            <div class="img-badge">⭐ Bestseller</div>
+          </div>
+          <div class="hero-img-card hero-img-secondary" data-tilt>
+            <img src="/images/shopping-bag.jpg" alt="Custom Shopping Bag" loading="eager">
+            <div class="img-badge img-badge-new">🔥 Hot</div>
+          </div>
+          <div class="hero-img-card hero-img-tertiary" data-tilt>
+            <img src="/images/drawstring-bag.jpg" alt="Drawstring Bag" loading="eager">
+          </div>
+          <div class="floating-card fc-1">
+            <span class="fc-emoji">📦</span>
+            <span>Orders shipped<br><strong>worldwide</strong></span>
+          </div>
+          <div class="floating-card fc-2">
+            <span class="fc-emoji">🌿</span>
+            <span>100% Eco<br><strong>Friendly</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-bar">
+    <div class="stat" data-count="30">
+      <div class="stat-num"><span class="counter">0</span>+</div>
+      <div class="stat-label">Min Order Qty</div>
+    </div>
+    <div class="stat" data-count="100">
+      <div class="stat-num"><span class="counter">0</span>%</div>
+      <div class="stat-label">Natural Cotton</div>
+    </div>
+    <div class="stat" data-count="12">
+      <div class="stat-num"><span class="counter">0</span>+</div>
+      <div class="stat-label">Bag Styles</div>
+    </div>
+    <div class="stat" data-count="500">
+      <div class="stat-num"><span class="counter">0</span>+</div>
+      <div class="stat-label">Happy Customers</div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section products-section" id="products">
+    <div class="section-header">
+      <div class="section-label">✦ Our Collection</div>
+      <h2 class="section-title">Every bag, made <em>your way</em></h2>
+      <p class="section-sub">Each piece is handcrafted with premium cotton. Limited production ensures exclusivity.</p>
+    </div>
+    <div class="products-filter">
+      <button class="filter-chip active" onclick="filterBags('all',this)">All Bags</button>
+      <button class="filter-chip" onclick="filterBags('tote',this)">Tote Bags</button>
+      <button class="filter-chip" onclick="filterBags('drawstring',this)">Drawstring</button>
+      <button class="filter-chip" onclick="filterBags('zipper',this)">Zipper</button>
+      <button class="filter-chip" onclick="filterBags('special',this)">Special</button>
+    </div>
+    <div class="products-grid" id="products-grid"></div>
+    <div class="products-fomo">
+      <div class="fomo-banner">
+        <span class="fomo-pulse"></span>
+        <strong>🔥 High demand alert:</strong> 23 people are looking at these bags right now. Don't miss out!
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about-section" id="about">
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="section-label">✦ Our Story</div>
+        <h2 class="section-title">Craftsmanship meets <em>flexibility</em></h2>
+        <p class="about-desc">Founded by two friends with a passion for sustainable living. We saw the gap — most manufacturers force high MOQs, leaving small businesses without options. <strong>That ends here.</strong></p>
+        <div class="values-grid">
+          <div class="value-card"><div class="value-icon">🌱</div><div class="value-title">100% Natural Cotton</div><div class="value-desc">Ethically sourced, eco-friendly materials.</div></div>
+          <div class="value-card"><div class="value-icon">✦</div><div class="value-title">Low MOQ</div><div class="value-desc">Starting from just 30 pieces.</div></div>
+          <div class="value-card"><div class="value-icon">🎨</div><div class="value-title">Fully Custom</div><div class="value-desc">Size, fabric, prints — your exact spec.</div></div>
+          <div class="value-card"><div class="value-icon">🌍</div><div class="value-title">Ships Global</div><div class="value-desc">Reliable international delivery.</div></div>
+        </div>
+      </div>
+      <div class="about-right">
+        <div class="about-image-stack">
+          <img src="/images/pineapple-tote.jpg" alt="Pineapple Tote Bag" class="about-img" loading="lazy">
+          <div class="about-quote-card">
+            <div class="quote-text">"No order is too small. Every bag deserves big attention."</div>
+            <div class="quote-meta">— Knot Your Bag Team</div>
+          </div>
+        </div>
+        <div class="timeline-card">
+          <div class="timeline-title">⚡ Production Speed</div>
+          <div class="tl-row"><span>30–100 pcs</span><span class="tl-time">1–2 weeks</span><div class="tl-bar"><div class="tl-fill" style="width:35%"></div></div></div>
+          <div class="tl-row"><span>100–500 pcs</span><span class="tl-time">2–3 weeks</span><div class="tl-bar"><div class="tl-fill" style="width:60%"></div></div></div>
+          <div class="tl-row"><span>500+ pcs</span><span class="tl-time">3–4 weeks</span><div class="tl-bar"><div class="tl-fill tl-fill-warm" style="width:85%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testimonials-section">
+    <div class="section-header">
+      <div class="section-label">✦ What People Say</div>
+      <h2 class="section-title">Loved by <em>500+</em> customers</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card"><div class="tc-stars">★★★★★</div><p>"Amazing quality! Ordered 50 custom totes for our startup — everyone loved them."</p><div class="tc-author">— Priya M., Bangalore</div></div>
+      <div class="testimonial-card"><div class="tc-stars">★★★★★</div><p>"The ikat tote is stunning. Got compliments everywhere. Ordering more!"</p><div class="tc-author">— Sneha R., Mumbai</div></div>
+      <div class="testimonial-card"><div class="tc-stars">★★★★★</div><p>"Fast delivery, great communication. Our best supplier for eco bags."</p><div class="tc-author">— Arjun K., Delhi</div></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section" id="faq">
+    <div class="faq-container">
+      <div class="section-label">✦ FAQ</div>
+      <h2 class="section-title">Common <em>questions</em></h2>
+      <div id="faq-list"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <div class="cta-glow"></div>
+    <div class="cta-content">
+      <div class="cta-badge">🔥 Limited slots available</div>
+      <h2 class="cta-title">Got an idea in mind?</h2>
+      <p class="cta-sub">Book your production slot now before the May batch fills up.</p>
+      <div class="cta-timer">
+        <div class="timer-block"><span id="timer-h" class="timer-num">23</span><span class="timer-label">Hours</span></div>
+        <div class="timer-sep">:</div>
+        <div class="timer-block"><span id="timer-m" class="timer-num">47</span><span class="timer-label">Mins</span></div>
+        <div class="timer-sep">:</div>
+        <div class="timer-block"><span id="timer-s" class="timer-num">12</span><span class="timer-label">Secs</span></div>
+      </div>
+      <p class="cta-timer-text">until current batch pricing expires</p>
+      <a href="https://wa.me/919975572700" class="btn btn-white btn-glow" target="_blank">Start Your Order Now →</a>
+      <div class="contact-chips">
+        <div class="contact-chip">📧 hello@knotyourbag.com</div>
+        <div class="contact-chip">📞 +91 9975572700</div>
+        <div class="contact-chip">📷 @knotyourbag</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-main">
+      <div><div class="footer-brand">Kn∞t Your Bag</div><div class="footer-tag">Custom Cotton Bags · Eco-Friendly · Low MOQ</div><p class="footer-quote">"Your ideas, our craftsmanship — perfectly tied together."</p></div>
+      <div><div class="footer-col-title">Products</div><a class="footer-link" href="#products">Tote Bags</a><a class="footer-link" href="#products">Drawstring</a><a class="footer-link" href="#products">Zipper Bags</a><a class="footer-link" href="#products">Special</a></div>
+      <div><div class="footer-col-title">Company</div><a class="footer-link" href="#about">About Us</a><a class="footer-link" href="#faq">FAQ</a><a class="footer-link" href="#contact">Contact</a></div>
+    </div>
+    <div class="footer-bottom">© 2026 Knot Your Bag. All rights reserved. Made with ♥ in India.</div>
+  </footer>
+
+  <!-- FOMO POPUP -->
+  <div class="fomo-popup" id="fomo-popup">
+    <div class="fp-img">🛍️</div>
+    <div class="fp-text"><strong>Someone in Mumbai</strong> just ordered 50 Custom Totes<br><small>2 minutes ago</small></div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
